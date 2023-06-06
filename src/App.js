@@ -9,10 +9,9 @@ function Square({ value, onSquareClick }) {
 }
 
 function Board({xIsNext, squares, onPlay}) {
-  
-  //const [squares, setSquares] = useState(Array(9).fill(null));
 
-  const handleSquareClick = (i) => {
+  const handleSquareClick = (i) => 
+  {
     if (squares[i] || calculateWinner(squares)) return;
 
     const nextSquares = squares.slice();
@@ -28,24 +27,33 @@ function Board({xIsNext, squares, onPlay}) {
   if (winner) status = "Winner: " + winner;
   else status = "Next Player: " + (xIsNext ? "X" : "O");
 
+  const renderSquares = () => {
+    const renderedSquares = []
+    for (let i = 0; i < 3; i++) {
+      const row = [];
+      for (let j = 0; j < 3; j++) {
+        const index = i * 3 + j;
+        row.push(
+          <Square
+            key={index}
+            value={squares[index]}
+            onSquareClick={() => handleSquareClick(index)}
+          />
+        );
+      }
+      renderedSquares.push(
+        <div key={i} className="board-row">
+          {row}
+        </div>
+      );
+    }
+    return renderedSquares;
+  }
+
   return (
     <>
       <div className="status">{status}</div>
-      <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleSquareClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleSquareClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleSquareClick(2)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[3]} onSquareClick={() => handleSquareClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleSquareClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleSquareClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleSquareClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleSquareClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleSquareClick(8)} />
-      </div>
+      {renderSquares()}
     </>
   );
 }
