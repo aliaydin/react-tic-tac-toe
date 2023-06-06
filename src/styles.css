@@ -71,6 +71,11 @@ body {
   width: 34px;
 }
 
+.square-number {
+  border: none;
+  font-size: 14px;
+}
+
 .board-row:after {
   clear: both;
   content: "";

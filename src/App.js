@@ -43,6 +43,7 @@ function Board({xIsNext, squares, onPlay}) {
       }
       renderedSquares.push(
         <div key={i} className="board-row">
+          <div className="square square-number">{i+1}</div>
           {row}
         </div>
       );
@@ -53,6 +54,14 @@ function Board({xIsNext, squares, onPlay}) {
   return (
     <>
       <div className="status">{status}</div>
+
+      <div>
+        <div className="square square-number"></div>
+        <div className="square square-number">1</div>
+        <div className="square square-number">2</div>
+        <div className="square square-number">3</div>
+      </div>
+
       {renderSquares()}
     </>
   );
